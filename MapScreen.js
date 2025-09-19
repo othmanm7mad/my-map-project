@@ -18,8 +18,9 @@ const MapScreen = () => {
     <View style={{ flex: 1 }}>
       <MapboxGL.MapView style={styles.map}>
         <MapboxGL.Camera
-          zoomLevel={10}
-          centerCoordinate={[-73.9749, 40.7736]} // إحداثيات المركز (خط العرض والطول)
+          zoomLevel={16}
+          centerCoordinate={[35.18991,31.9430105 ]} // إحداثيات المركز (خط العرض والطول)
+          
         />
       </MapboxGL.MapView>
     </View>
