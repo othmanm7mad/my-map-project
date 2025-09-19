@@ -45,6 +45,14 @@ export default {
         {
           RNMapboxMapsDownloadToken: process.env.MAPBOX_TOKEN
         }
+      ],
+      [
+        "expo-location",
+        {
+          locationAlwaysAndWhenInUsePermission: "يحتاج التطبيق للموقع لإيجاد أقرب قابلة في حالات الطوارئ.",
+          isIosBackgroundLocationEnabled: false,
+          isAndroidBackgroundLocationEnabled: false
+        }
       ]
     ]
   }
