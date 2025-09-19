@@ -10,7 +10,11 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Map">
-        <Stack.Screen name="Map" component={MapScreen} />
+        <Stack.Screen 
+          name="Map" 
+          component={MapScreen} 
+          options={{ headerShown: false }} // إخفاء العنوان
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
