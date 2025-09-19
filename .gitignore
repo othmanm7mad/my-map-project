@@ -42,3 +42,5 @@ yarn-error.*
 
 #built android files
 *.apk
+
+*.env
