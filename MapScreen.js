@@ -1,6 +1,6 @@
 // MapScreen.js
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, Alert, TouchableOpacity, Text, StatusBar, SafeAreaView, Modal } from 'react-native';
+import { View, StyleSheet, Alert, TouchableOpacity, Text, StatusBar, SafeAreaView, Modal, Platform } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import MapboxGL from '@rnmapbox/maps';
 import Constants from 'expo-constants';
@@ -149,15 +149,22 @@ const MapScreen = () => {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: '#FF8C00' }}>
+    <SafeAreaView
+      style={{
+        flex: 1,
+        backgroundColor: '#FF8C00',
+        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0, // Add padding for Android
+      }}
+    >
       <StatusBar backgroundColor="#FF8C00" barStyle="light-content" />
-      <SafeAreaView style={styles.container}>
+      {/* Main Content */}
+      <View style={styles.container}>
         {/* Header */}
         <View style={styles.header}>
           <Text style={styles.headerTitle}>قابلة عَ الطريق</Text>
         </View>
 
-        {/* Container */}
+        {/* Map Container */}
         <View style={styles.mapContainer}>
           <MapboxGL.MapView style={styles.map}>
             <MapboxGL.Camera
@@ -165,7 +172,7 @@ const MapScreen = () => {
               centerCoordinate={userLocation || [35.1899, 32.2200]}
             />
 
-            {/* عرض مواقع القابلات */}
+            {/* Midwives Locations */}
             {MIDWIVES_LOCATIONS.map((midwife) => (
               <MapboxGL.PointAnnotation
                 key={midwife.id}
@@ -182,7 +189,7 @@ const MapScreen = () => {
               </MapboxGL.PointAnnotation>
             ))}
 
-            {/* عرض موقع المستخدم */}
+            {/* User Location */}
             {userLocation && (
               <MapboxGL.PointAnnotation
                 id="user-location"
@@ -195,18 +202,18 @@ const MapScreen = () => {
             )}
           </MapboxGL.MapView>
 
-          {/* زر الطوارئ */}
+          {/* SOS Button */}
           <TouchableOpacity style={styles.sosButton} onPress={handleSOSPress}>
             <Text style={styles.sosButtonText}>🚨 SOS </Text>
           </TouchableOpacity>
 
-          {/* زر شباك الشباب */}
+          {/* Shabak Button */}
           <TouchableOpacity style={styles.shabakButton} onPress={handleCallShabakShabab}>
             <Text style={styles.shabakButtonText}>📞</Text>
           </TouchableOpacity>
         </View>
-      </SafeAreaView>
-    </View>
+      </View>
+    </SafeAreaView>
   );
 };
 
