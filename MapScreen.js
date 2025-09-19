@@ -231,9 +231,9 @@ const MapScreen = () => {
 
         {/* SOS Button */}
         <TouchableOpacity style={styles.sosButton} onPress={handleSOSPress}>
-          <Feather name="alert-triangle" size={20} color="white" />
-          <Text style={styles.sosButtonText}> SOS </Text>
+          <Text style={styles.sosButtonText}>🚨 SOS </Text>
         </TouchableOpacity>
+
 
         {/* Nearest Midwife Info */}
         {isEmergencyActive && nearestMidwife && (
@@ -302,21 +302,18 @@ const styles = StyleSheet.create({
   mapContainer: { flex: 1, position: 'relative' },
   map: { flex: 1 },
   sosButton: {
-    flexDirection: 'row',
     position: 'absolute',
-    bottom: 80,
+    bottom: 50,
     alignSelf: 'center',
     backgroundColor: '#ff4444',
     paddingHorizontal: 30,
     paddingVertical: 15,
-    borderRadius: 25,
+    borderRadius: 30,
     elevation: 5,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 3,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   sosButtonText: { color: 'white', fontSize: 18, fontWeight: 'bold', marginLeft: 10 },
   midwifeMarker: {
