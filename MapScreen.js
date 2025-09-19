@@ -149,145 +149,64 @@ const MapScreen = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={{ flex: 1, backgroundColor: '#FF8C00' }}>
       <StatusBar backgroundColor="#FF8C00" barStyle="light-content" />
-
-      {/* Header */}
-      <View style={styles.header}>
-        <Text style={styles.headerTitle}>قابلة عَ الطريق</Text>
-      </View>
-
-      {/* Container */}
-      <View style={styles.mapContainer}>
-        <MapboxGL.MapView style={styles.map}>
-          <MapboxGL.Camera
-            zoomLevel={15}
-            centerCoordinate={userLocation || [35.1899, 32.2200]}
-          />
-
-          {/* عرض مواقع القابلات */}
-          {MIDWIVES_LOCATIONS.map((midwife) => (
-            <MapboxGL.PointAnnotation
-              key={midwife.id}
-              id={`midwife-${midwife.id}`}
-              coordinate={midwife.coordinate}
-              onSelected={() => handleMidwifePress(midwife)}
-            >
-              <TouchableOpacity
-                style={styles.midwifeMarker}
-                onPress={() => handleMidwifePress(midwife)}
-              >
-                <Text style={styles.markerText}>👩‍⚕️</Text>
-              </TouchableOpacity>
-            </MapboxGL.PointAnnotation>
-          ))}
-
-          {/* عرض موقع المستخدم */}
-          {userLocation && (
-            <MapboxGL.PointAnnotation
-              id="user-location"
-              coordinate={userLocation}
-            >
-              <View style={styles.userMarker}>
-                <Text style={styles.markerText}>🤰</Text>
-              </View>
-            </MapboxGL.PointAnnotation>
-          )}
-        </MapboxGL.MapView>
-
-        {/* زر الطوارئ */}
-        <TouchableOpacity style={styles.sosButton} onPress={handleSOSPress}>
-          <Text style={styles.sosButtonText}>🚨 SOS </Text>
-        </TouchableOpacity>
-
-        {/* زر شباك الشباب */}
-        <TouchableOpacity style={styles.shabakButton} onPress={handleCallShabakShabab}>
-          <Text style={styles.shabakButtonText}>📞</Text>
-        </TouchableOpacity>
-
-        {/* معلومات القابلة الأقرب - بس لو في طوارئ نشطة */}
-        {isEmergencyActive && nearestMidwife && (
-          <View style={styles.nearestMidwifeInfo}>
-            <Text style={styles.nearestMidwifeTitle}>القابلة المختارة:</Text>
-            <Text style={styles.nearestMidwifeName}>{nearestMidwife.name}</Text>
-            <Text style={styles.nearestMidwifeDistance}>
-              المسافة: {nearestMidwife.distance.toFixed(2)} كم
-            </Text>
-            <TouchableOpacity
-              style={styles.cancelEmergencyButton}
-              onPress={() => {
-                setIsEmergencyActive(false);
-                setNearestMidwife(null);
-              }}
-            >
-              <Text style={styles.cancelEmergencyText}>إلغاء الطوارئ</Text>
-            </TouchableOpacity>
-          </View>
-        )}
-      </View>
-
-      {/* Modal لتفاصيل القابلة */}
-      <Modal
-        visible={showMidwifeDetails}
-        transparent={true}
-        animationType="slide"
-        onRequestClose={() => setShowMidwifeDetails(false)}
-      >
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalContent}>
-            {selectedMidwife && (
-              <>
-                <Text style={styles.modalTitle}>{selectedMidwife.name}</Text>
-                <Text style={styles.modalDetail}>⏱️ {selectedMidwife.experience}</Text>
-                <Text style={styles.modalDetail}>🏥 {selectedMidwife.specialty}</Text>
-                <Text style={styles.modalDetail}>
-                  📍 المسافة: {selectedMidwife.distance?.toFixed(2)} كم
-                </Text>
-
-                <View style={styles.modalButtons}>
-                  <TouchableOpacity
-                    style={styles.closeButton}
-                    onPress={() => setShowMidwifeDetails(false)}
-                  >
-                    <Text style={styles.closeButtonText}>إغلاق</Text>
-                  </TouchableOpacity>
-                </View>
-              </>
-            )}
-          </View>
+      <SafeAreaView style={styles.container}>
+        {/* Header */}
+        <View style={styles.header}>
+          <Text style={styles.headerTitle}>قابلة عَ الطريق</Text>
         </View>
-      </Modal>
 
-      {/* الشريط السفلي */}
-      <View style={styles.bottomNav}>
-        <TouchableOpacity style={styles.navItem}>
-          <FontAwesome name="home" size={20} color="white" />
-          <Text style={styles.navText}>الرئيسية</Text>
-        </TouchableOpacity>
+        {/* Container */}
+        <View style={styles.mapContainer}>
+          <MapboxGL.MapView style={styles.map}>
+            <MapboxGL.Camera
+              zoomLevel={15}
+              centerCoordinate={userLocation || [35.1899, 32.2200]}
+            />
 
-        <TouchableOpacity style={styles.navItem}>
-          <Text style={styles.navIcon}>📄</Text>
-          <Text style={styles.navText}>المقالات</Text>
-        </TouchableOpacity>
+            {/* عرض مواقع القابلات */}
+            {MIDWIVES_LOCATIONS.map((midwife) => (
+              <MapboxGL.PointAnnotation
+                key={midwife.id}
+                id={`midwife-${midwife.id}`}
+                coordinate={midwife.coordinate}
+                onSelected={() => handleMidwifePress(midwife)}
+              >
+                <TouchableOpacity
+                  style={styles.midwifeMarker}
+                  onPress={() => handleMidwifePress(midwife)}
+                >
+                  <Text style={styles.markerText}>👩‍⚕️</Text>
+                </TouchableOpacity>
+              </MapboxGL.PointAnnotation>
+            ))}
 
-        <TouchableOpacity style={styles.navItem}>
-          <Text style={styles.navIcon}>🔔</Text>
-          <Text style={styles.navText}>الإشعارات</Text>
-        </TouchableOpacity>
+            {/* عرض موقع المستخدم */}
+            {userLocation && (
+              <MapboxGL.PointAnnotation
+                id="user-location"
+                coordinate={userLocation}
+              >
+                <View style={styles.userMarker}>
+                  <Text style={styles.markerText}>🤰</Text>
+                </View>
+              </MapboxGL.PointAnnotation>
+            )}
+          </MapboxGL.MapView>
 
-        <TouchableOpacity style={[styles.navItem, styles.activeNav]}>
-          <View style={styles.activeNavButton}>
-            <Text style={styles.activeNavIcon}>👩‍⚕️</Text>
-          </View>
-          <Text style={[styles.navText, styles.activeNavText]}>قابلة عَ الطريق</Text>
-        </TouchableOpacity>
+          {/* زر الطوارئ */}
+          <TouchableOpacity style={styles.sosButton} onPress={handleSOSPress}>
+            <Text style={styles.sosButtonText}>🚨 SOS </Text>
+          </TouchableOpacity>
 
-        <TouchableOpacity style={styles.navItem}>
-          <Text style={styles.navIcon}>❓</Text>
-          <Text style={styles.navText}>أسئلة شائعة</Text>
-        </TouchableOpacity>
-      </View>
-    </SafeAreaView>
+          {/* زر شباك الشباب */}
+          <TouchableOpacity style={styles.shabakButton} onPress={handleCallShabakShabab}>
+            <Text style={styles.shabakButtonText}>📞</Text>
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
+    </View>
   );
 };
 
