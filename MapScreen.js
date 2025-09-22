@@ -296,8 +296,13 @@ const MapScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#f5f5f5' },
-  header: { backgroundColor: '#FF8C00', paddingVertical: 15, alignItems: 'center' },
+container: { flex: 1, backgroundColor: '#f5f5f5' },
+  header: { 
+    backgroundColor: '#ffae42', 
+    paddingVertical: 15, 
+    alignItems: 'center', 
+    paddingTop: 30 // زيادة المسافة من أعلى الشاشة لتجنب التداخل مع الكاميرا
+  },
   headerTitle: { fontSize: 20, fontWeight: 'bold', color: 'white' },
   mapContainer: { flex: 1, position: 'relative' },
   map: { flex: 1 },
